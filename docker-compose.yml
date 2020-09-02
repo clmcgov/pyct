@@ -1,0 +1,11 @@
+version: '3.6'
+
+services:
+  
+  adapter:
+    build: .
+    environment:
+      PYTHONPATH: /code
+    volumes:
+      - ./code:/code
+    tty: true

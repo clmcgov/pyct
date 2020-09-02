@@ -1,0 +1,11 @@
+C:\Users\Cullen.McGovern\git\pyGRIN\code\PyGRIN\bin\Debug\PyGRIN.dll.config
+C:\Users\Cullen.McGovern\git\pyGRIN\code\PyGRIN\bin\Debug\PyGRIN.dll
+C:\Users\Cullen.McGovern\git\pyGRIN\code\PyGRIN\bin\Debug\PyGRIN.pdb
+C:\Users\Cullen.McGovern\git\pyGRIN\code\PyGRIN\obj\Debug\PyGRIN.dll
+C:\Users\Cullen.McGovern\git\pyGRIN\code\PyGRIN\obj\Debug\PyGRIN.pdb
+C:\Users\Cullen.McGovern\git\pyGRIN\code\cs\PyGRIN\bin\Debug\PyGRIN.dll.config
+C:\Users\Cullen.McGovern\git\pyGRIN\code\cs\PyGRIN\bin\Debug\PyGRIN.dll
+C:\Users\Cullen.McGovern\git\pyGRIN\code\cs\PyGRIN\bin\Debug\PyGRIN.pdb
+C:\Users\Cullen.McGovern\git\pyGRIN\code\cs\PyGRIN\obj\Debug\PyGRIN.csprojAssemblyReference.cache
+C:\Users\Cullen.McGovern\git\pyGRIN\code\cs\PyGRIN\obj\Debug\PyGRIN.dll
+C:\Users\Cullen.McGovern\git\pyGRIN\code\cs\PyGRIN\obj\Debug\PyGRIN.pdb
