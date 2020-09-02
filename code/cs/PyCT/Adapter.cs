@@ -50,7 +50,7 @@ namespace PyCT
             this.Password = password;
             this.guiService.Timeout = System.Threading.Timeout.Infinite;
             this.guiService.EnableDecompression = true;
-            this.guiService.ValidateLogin(false, this.Username, this.Password);
+            //this.guiService.ValidateLogin(false, this.Username, this.Password);
         }
 
         public DataSet GetData(string dataView, string parms, int offset, int limit)
