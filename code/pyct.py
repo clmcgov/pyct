@@ -67,7 +67,7 @@ class Session:
         """create .net adapter object and temporary SQLite db
         """
         # create .net object in clr, get wrapper
-        self._service = Adapter(username, password, url)
+        self._adapter = Adapter(username, password, url)
         # create unique temp db for this connection
         self._db = connect("", detect_types=PARSE_DECLTYPES)
 
@@ -91,12 +91,19 @@ class Session:
         # close connection (drops temp db)
         self._db.close()
 
+    def validate(self):
+        ds = self._adapter.Validate()
+        dt = ds.Tables['validate_login']
+        keys = [str(c) for c in dt.Columns]
+        vals = self._to_record(dt.Rows[0])
+        return dict(zip(keys, vals))
+
     def add_data(self, dataview, offset=0, limit=0, params={}):
         """populate temp db with data from dataview
         """
         params = self._param_string(params)
         # get .net dataset and table of interest
-        ds = self._service.GetData(dataview, params, offset, limit)
+        ds = self._adapter.GetData(dataview, params, offset, limit)
         dt = ds.Tables[dataview]
         # get list of (column name, dtype)
         cols = [(c.ToString(), c.DataType.get_Name()) for c in dt.Columns]
@@ -138,7 +145,7 @@ class Session:
                 res.append(Decimal(val.ToString()))
             else:
                 res.append(val)
-        return tuple(res)
+        return res
 
     @staticmethod
     def _param_string(params):

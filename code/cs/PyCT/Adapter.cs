@@ -52,18 +52,22 @@ namespace PyCT
             this.guiService.EnableDecompression = true;
         }
 
+        public DataSet Validate() {
+            return this.guiService.ValidateLogin(false, this.Username, this.Password);
+        }
+
         public DataSet GetData(string dataView, string parms, int offset, int limit)
         {
             DataSet dataSet = this.guiService.GetData(
                 false, this.Username, this.Password, dataView, parms, offset, limit, null);
             if (dataSet.Tables.Contains(dataView)) 
             {
-                ApplyPKeyConstraints(dataSet.Tables[dataView]);
+                ApplyConstraints(dataSet.Tables[dataView]);
             }
             return dataSet;
         }
 
-        public void ApplyPKeyConstraints(DataTable dataTable)
+        public void ApplyConstraints(DataTable dataTable)
         {
             if (dataTable != null &&
                 dataTable.Columns != null &&

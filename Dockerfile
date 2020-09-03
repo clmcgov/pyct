@@ -10,6 +10,9 @@ RUN apt install -y mono-devel python3 python3-pip clang
 # have to separate, or pythonnet won't find pycparser
 RUN pip3 install pycparser
 RUN pip3 install pythonnet ipython pytest
-
+# add it to pythonpath
+ENV PYTHONPATH=/code
+# set default GRIN url
+ENV GRIN_URL=https://npgsdev.ars-grin.gov/GRINGlobal/GUI.asmx
 # set the working directory in the container
 WORKDIR /code
