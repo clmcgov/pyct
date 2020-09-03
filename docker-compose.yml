@@ -6,6 +6,7 @@ services:
     build: .
     environment:
       PYTHONPATH: /code
+      GRIN_URL: https://npgsdev.ars-grin.gov/GRINGlobal/GUI.asmx
     volumes:
       - ./code:/code
     tty: true

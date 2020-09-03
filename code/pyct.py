@@ -1,6 +1,7 @@
 from contextlib import contextmanager
 from datetime import datetime
 from decimal import Decimal
+from os import environ
 from pdb import set_trace
 from sqlite3 import (
     PARSE_DECLTYPES, connect, register_adapter, register_converter
@@ -12,10 +13,6 @@ AddReference("System")
 AddReference("cs/PyCT/bin/Debug/PyCT")
 from System import DBNull, DateTime, Decimal as Decimal_
 from PyCT import Adapter
-
-# GRIN urls
-DEV = "https://npgsdev.ars-grin.gov/GRINGlobal/GUI.asmx"
-WEB = "https://npgsweb.ars-grin.gov/GRINGlobal/GUI.asmx" 
 
 # for table creation
 DTYPES = {
@@ -37,6 +34,8 @@ DTYPES = {
     "UInt32": "integer",
     "UInt64": "integer"
 }
+
+GRIN_URL = environ.get("GRIN_URL")
 
 # decimal dtype
 def adapt_decimal(val):
@@ -64,10 +63,10 @@ class Session:
     """communicates with GG middle tier
     """
 
-    def __init__(self, username, password, url=DEV):
+    def __init__(self, username, password, url=GRIN_URL):
         """create .net adapter object and temporary SQLite db
         """
-        # create .net object in clr, get hooks
+        # create .net object in clr, get wrapper
         self._service = Adapter(username, password, url)
         # create unique temp db for this connection
         self._db = connect("", detect_types=PARSE_DECLTYPES)
