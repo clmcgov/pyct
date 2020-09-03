@@ -65,8 +65,9 @@ class Session:
     """
 
     def __init__(self, username, password, url=DEV):
-        """create .net adapter object
+        """create .net adapter object and temporary SQLite db
         """
+        # create .net object in clr, get hooks
         self._service = Adapter(username, password, url)
         # create unique temp db for this connection
         self._db = connect("", detect_types=PARSE_DECLTYPES)
@@ -76,38 +77,50 @@ class Session:
         return self
 
     def __exit__(self, *args):
-        self.close()
+        self.end()
 
     def __del__(self):
-        self.close()
+        self.end()
 
     @property
     def db(self):
         return self._db
 
-    def close(self):
+    def end(self):
+        """close db connection and drop
+        """
         # close connection (drops temp db)
         self._db.close()
 
     def add_data(self, dataview, offset=0, limit=0, params={}):
+        """populate temp db with data from dataview
+        """
         params = self._param_string(params)
+        # get .net dataset and table of interest
         ds = self._service.GetData(dataview, params, offset, limit)
         dt = ds.Tables[dataview]
+        # get list of (column name, dtype)
         cols = [(c.ToString(), c.DataType.get_Name()) for c in dt.Columns]
         self._create_table(dataview, cols)
         self._insert_rows(dataview, cols, dt.Rows)
+        # make sure meory is freed up
         dt.Clear()
         dt.Dispose()
 
     def _create_table(self, name, columns):
+        """create table in tmp db from datatable if it doesn't exist
+        """
         cols = ", ".join(f"{c[0]} {DTYPES[c[1]]}" for c in columns) 
         self.db.execute(f"create table if not exists {name} ({cols});")
         self.db.commit()
 
     def _insert_rows(self, table, columns, rows):
+        """insert rows from datatable
+        """
         cols = ",".join("?" * len(columns))
         sql = f"insert into {table} values ({cols})"
         gen = (self._to_record(r) for r in rows)
+        # automatic begin transaction
         self.db.executemany(sql, gen)
         self.db.commit()
 
@@ -135,13 +148,16 @@ class Session:
         res = []
         for key, val in params.items():
             tmp = f":{key}="
+            # if it's some kind of collection that's not a string or bytes
             if hasattr(val, "__iter__") and not isinstance(val, (str, bytes)):
                 tmp += ",".join(str(x) for x in val)
             else:
                 try:
-                    val = val.decode()
+                    #try to decode it if it's bytes
+                    val = val.decode('utf16')
                 except AttributeError:
                     pass
+                # just use as is if it can't be decoded
                 tmp += str(val)
             res.append(tmp)
         return ";".join(res)
