@@ -103,7 +103,7 @@ class Session:
         cols = [(c.ToString(), c.DataType.get_Name()) for c in dt.Columns]
         self._create_table(dataview, cols)
         self._insert_rows(dataview, cols, dt.Rows)
-        # make sure meory is freed up
+        # make sure memory freed up (who knows what .net is doing)
         dt.Clear()
         dt.Dispose()
 
