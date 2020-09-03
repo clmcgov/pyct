@@ -14,5 +14,3 @@ RUN pip3 install pythonnet ipython pytest
 ENV PYTHONPATH=/code
 # set default GRIN url
 ENV GRIN_URL=https://npgsdev.ars-grin.gov/GRINGlobal/GUI.asmx
-# set the working directory in the container
-WORKDIR /code
