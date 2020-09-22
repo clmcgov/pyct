@@ -1,0 +1,29 @@
+version: '3.6'
+
+services:
+  
+  pyct:
+    build: pyct
+    environment:
+      - PYTHONPATH=/src/py
+      - GRIN_URL=https://npgsdev.ars-grin.gov/GRINGlobal/GUI.asmx
+      - GRIN_USER
+      - GRIN_PASSWORD
+    depends_on: 
+      - db
+    volumes:
+      - ./pyct/src:/src
+    tty: true
+
+  db:
+    build: db
+    environment:
+      - PYTHONPATH=/src
+      - POSTGRES_DB=test
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/src:/src
+    tty: true

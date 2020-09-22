@@ -1,0 +1,6 @@
+/src/cs/PyCT/obj/Debug/.NETFramework,Version=v4.6.2.AssemblyAttribute.cs
+/src/cs/PyCT/bin/Debug/PyCT.dll.config
+/src/cs/PyCT/bin/Debug/PyCT.pdb
+/src/cs/PyCT/bin/Debug/PyCT.dll
+/src/cs/PyCT/obj/Debug/PyCT.dll
+/src/cs/PyCT/obj/Debug/PyCT.pdb

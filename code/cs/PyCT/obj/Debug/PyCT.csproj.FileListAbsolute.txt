@@ -1,6 +1,0 @@
-C:\Users\Cullen.McGovern\git\pyct\code\cs\PyCT\bin\Debug\PyCT.dll.config
-C:\Users\Cullen.McGovern\git\pyct\code\cs\PyCT\bin\Debug\PyCT.dll
-C:\Users\Cullen.McGovern\git\pyct\code\cs\PyCT\bin\Debug\PyCT.pdb
-C:\Users\Cullen.McGovern\git\pyct\code\cs\PyCT\obj\Debug\PyCT.dll
-C:\Users\Cullen.McGovern\git\pyct\code\cs\PyCT\obj\Debug\PyCT.pdb
-C:\Users\Cullen.McGovern\git\pyct\code\cs\PyCT\obj\Debug\PyCT.csprojAssemblyReference.cache

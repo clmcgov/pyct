@@ -1,0 +1,3 @@
+pytest
+ipython
+psycopg2-binary
